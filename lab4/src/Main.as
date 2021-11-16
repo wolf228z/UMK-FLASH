@@ -5,7 +5,7 @@ package
 	
 	/**
 	 * ...
-	 * @author goncharov
+	 * @author Vladimir
 	 */
 	public class Main extends Sprite 
 	{
@@ -18,13 +18,26 @@ package
 		
 		private function init(e:Event = null):void 
 		{
-			var today:Date = new Date(2011, 10, 3);
-			var newYear:Date = new Date(2012, 0, 1);
-			var todayTime:Number = today.time;
-			var newYearTime:Number = newYear.time;
-			var millisLeft:Number = newYearTime - todayTime;
-			var daysLeft:Number = Math.round(millisLeft/1000/60/60/24);
-			trace(daysLeft);
+			removeEventListener(Event.ADDED_TO_STAGE, init);
+			// entry point
+			var sinWavePosition = 100; 
+			var cosWavePosition = 200; 
+			var sinWaveColor:uint = 0xFF0000; 
+			var cosWaveColor:uint = 0x00FF00; 
+			var waveMultiplier:Number = 10; 
+			var waveStretcher:Number = 5; 
+			var i:uint; 
+			for(i = 1; i < stage.stageWidth; i++) 
+		{ 
+			var sinPosY:Number = Math.sin(i / waveStretcher) * waveMultiplier; 
+			var cosPosY:Number = Math.cos(i / waveStretcher) * waveMultiplier; 
+     
+			graphics.beginFill(sinWaveColor); 
+			graphics.drawRect(i, sinWavePosition + sinPosY, 5, 5);  
+			graphics.beginFill(cosWaveColor); 
+			graphics.drawRect(i, cosWavePosition + cosPosY,5,5); 
+		}
+
 		}
 		
 	}
